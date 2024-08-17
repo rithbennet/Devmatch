@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variables
-
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
+const readline = require('readline');
 
 // Environment variables
 const API_URL_WALLET = process.env.NEXT_PUBLIC_APU_URL_WALLET_CREATE;
@@ -21,10 +21,10 @@ async function createWallet(user, retryCount = 0) {
         
         // Construct the request body
         const requestBody = {
-            name: user.username, // Adjust based on actual data fields
+            name: user.username,
             email: user.email,
             ic: user.companyRegistrationNumber,
-            phone: user.phone || null // Provide default if phone is not available
+            phone: user.phone || null
         };
 
         const response = await axios.post(API_URL_WALLET, requestBody, {
@@ -36,26 +36,23 @@ async function createWallet(user, retryCount = 0) {
             timeout: 30000 // 30 seconds timeout
         });
 
-        // Log the full response for debugging
         console.log('API Response:', response.data);
 
-        const wallet = response.data.result.wallet; // Access wallet information from result
+        const wallet = response.data.result.wallet;
         if (!wallet) {
             throw new Error('Wallet information is missing from the response.');
         }
 
-        const walletId = wallet.wallet_id; // Extract wallet ID from wallet object
+        const walletId = wallet.wallet_id;
         if (!walletId) {
             throw new Error('Wallet ID is missing from the wallet object.');
         }
 
-        // Save wallet and user details to MongoDB
         await saveUserWallet(user, walletId);
 
         console.log('Wallet created and user details saved:', walletId);
     } catch (error) {
         if (error.response && error.response.status === 429 && retryCount < maxRetries) {
-            // Rate limit error (HTTP 429) - retry after a delay
             console.warn('Rate limit exceeded. Retrying in ' + delay + 'ms...');
             await new Promise(resolve => setTimeout(resolve, delay));
             await createWallet(user, retryCount + 1);
@@ -68,7 +65,7 @@ async function createWallet(user, retryCount = 0) {
 async function saveUserWallet(user, walletId) {
     try {
         await client.connect();
-        const db = client.db('User_wallet'); // Adjust based on your DB name
+        const db = client.db('User_wallet');
         const collection = db.collection('user_wallets');
 
         const userWithWallet = {
@@ -85,14 +82,31 @@ async function saveUserWallet(user, walletId) {
     }
 }
 
-// Example user object
-const user = {
-    username: 'exampleUser',
-    email: 'user@example.com',
-    password: 'securepassword',
-    companyRegistrationNumber: '123456789',
-    phone: '1234567890' // Add phone if available
-};
+// Function to prompt user input
+function promptUserInput(query) {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-// Call createWallet with the user details
-createWallet(user);
+    return new Promise(resolve => rl.question(query, answer => {
+        rl.close();
+        resolve(answer);
+    }));
+}
+
+async function main() {
+    const user = {
+        username: await promptUserInput('Enter username: '),
+        email: await promptUserInput('Enter email: '),
+        password: await promptUserInput('Enter password: '),
+        companyRegistrationNumber: await promptUserInput('Enter company registration number: '),
+        phone: await promptUserInput('Enter phone number (optional): ')
+    };
+
+    await createWallet(user);
+}
+
+main();
+
+export { createWallet };
