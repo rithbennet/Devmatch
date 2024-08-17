@@ -1,21 +1,20 @@
 .container{
-    
-    position:relative;
     width:100%;
     height:100%;
-    margin-left: 67%;
-    margin-top: 5%;
-    margin:5% 5% 5% 66%;
-    
-
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .loginConsole{
     border:3px solid white;
     border-radius: 25px;
     background-color: black;
     padding: 50px;
     width:350px;
-    height:425px;
+    height:550px;
+    margin-top:5%;
+    margin-bottom:5%;
     
 }
 
@@ -28,6 +27,8 @@
     margin-bottom: 30px;
    
 }
+
+
 
 .inter_semiBold2{
 
@@ -42,7 +43,7 @@
 .inter_regular{
     font-family: 'Inter', sans-serif;
     font-weight: 200;
-    font-size:15px;
+    font-size:13px;
     color:white;
     
 }
@@ -63,14 +64,15 @@
 }
 
 .formContainer{
-    input[type=text], input[type=password] {
-        border: 2px solid white;
+    input[type=text], input[type=password],input[type=email],input[type=number],input[type=tel] {
+        border: 1px solid white;
         border-radius: 4px;
         padding: 8px;
         font-size: 16px;
         width: 100%;
         box-sizing: border-box;
-        margin:5px 0px 15px 0px;
+        margin:5px 0px 20px 0px;
+        
     
         &:focus {
           border-color: blue;
@@ -82,14 +84,21 @@
           color: #aaa;
           font-style: italic;
         }
-      }
+    }
 }
-
+.overlay{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .submit{
+    
     border-radius: 25px;
     background-color: black;
     border:1px solid white;
-    padding:5px 10px 5px 10px;
+    padding:5px 15px 5px 15px;
     margin-bottom: 20px;
     margin-top: 10px;
 
@@ -112,24 +121,18 @@
     }
 }
 
-
-
-.link{
-    display:inline-flex;
-    text-decoration: none;
+.successMessage {
+    margin-top: 15px;
+    
+    
+    text-align: center;
+    transition: .5s linear;
     font-family: 'Inter', sans-serif;
-    font-weight: 200px;
+    font-weight: 600;
     font-size:15px;
     color:white;
-
-
-    &:hover{
-        font-weight:500px;
-        text-decoration: underline;
-    }
+   
 }
 
 
 
-
-  
