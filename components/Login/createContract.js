@@ -180,7 +180,7 @@ async function main() {
         console.error('Error in the contract creation process:', error.message);
     }
 }
-
+//lmao
 
 main();
 
