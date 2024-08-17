@@ -18,7 +18,7 @@ async function createWallet(user, retryCount = 0) {
 
     try {
         console.log('Creating new wallet for user...');
-        
+
         // Construct the request body
         const requestBody = {
             name: user.username,
@@ -48,7 +48,7 @@ async function createWallet(user, retryCount = 0) {
             throw new Error('Wallet ID is missing from the wallet object.');
         }
 
-        await saveUserWallet(user, walletId);
+        await saveUserWallet(user, walletId, wallet.wallet_address); // Updated to include wallet address
 
         console.log('Wallet created and user details saved:', walletId);
     } catch (error) {
@@ -62,7 +62,7 @@ async function createWallet(user, retryCount = 0) {
     }
 }
 
-async function saveUserWallet(user, walletId) {
+async function saveUserWallet(user, walletId, walletAddress) {
     try {
         await client.connect();
         const db = client.db('User_wallet');
@@ -70,7 +70,8 @@ async function saveUserWallet(user, walletId) {
 
         const userWithWallet = {
             ...user,
-            walletId
+            walletId,
+            walletAddress // Include wallet address
         };
 
         await collection.insertOne(userWithWallet);
@@ -108,5 +109,3 @@ async function main() {
 }
 
 main();
-
-export { createWallet };
