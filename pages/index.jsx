@@ -2,7 +2,7 @@ import Login from "../components/login";
 
 import Welcome from "../components/welcome";
 
-import Registration from "../components/registration";
+
 
 
 export default function Home() {
@@ -10,13 +10,6 @@ export default function Home() {
         <div>
             <Welcome/>
             <Login/>
-
-            
-=======
-            <Registration/>
-            <h1>Devmatch</h1>
-
         </div>
-        
     );
 }
