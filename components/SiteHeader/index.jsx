@@ -63,7 +63,7 @@ export default function SiteHeader() {
                 <div className={styles.overlay2}>
                     <div className={styles.overlay}>
                             <div className={styles.column1}>
-                                <img src="/logo.png" alt="logo" className={styles.logo} />
+                                <img src='/mydocchain.png' alt='logo' className={styles.logo}/>   
                             </div>
                             <div className={styles.column}>
                                 <Link href="/main" className={styles.link}>Home</Link>

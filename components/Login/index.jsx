@@ -61,9 +61,13 @@ const Login = () => {
                     
                     
                     <button className={styles.submit} type="submit">
+                    <Link href="/main">
                             <div className={styles.submitText}>
+                                
                             Login
+                            
                             </div>
+                            </Link>
                         </button>
                      
                 </form>

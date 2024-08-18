@@ -2,6 +2,7 @@
     width:100%;
     display:flex;
     justify-content: center;
+    align-items: center;
     padding:10px;
     background-color: #18181B;
     
@@ -82,4 +83,9 @@
     &:hover{
         background-color: #27272A;
     }
+}
+
+.logo{
+    width:80px;
+    height:50px;
 }
