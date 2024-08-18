@@ -1,0 +1,16 @@
+/* styles/globals.css */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Global background color */
+    color: white; /* Ensure text is readable on the dark background */
+    font-family: 'Inter', sans-serif; /* Apply global font */
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}

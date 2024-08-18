@@ -1,5 +1,4 @@
 import styles from "./styles.module.scss";
-
 /**
  *
  * @returns {JSX.Element}
@@ -7,8 +6,12 @@ import styles from "./styles.module.scss";
  */
 export default function Welcome() {
     return(
-        <div>
-            <h1>Welcome</h1>
+        <div className={styles.container}>
+            <div className={styles.semiBold}>
+                Welcome to
+            </div>
+
+            
         </div>
     )
 }
