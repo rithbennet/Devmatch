@@ -8,7 +8,7 @@ export default function Welcome() {
     return(
         <div className={styles.container}>
             <div className={styles.semiBold}>
-                Welcome to
+                Welcome!
             </div>
 
             
